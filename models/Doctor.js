@@ -16,6 +16,7 @@ const docSchema = new Schema({
   //tableDiet: { type: Array },
   users: [{ type: Schema.Types.ObjectId, ref: "User" }],
   tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
+  isDoctor: { type: Boolean, default: true },
 });
 
 const Doctor = mongoose.model("Doctor", docSchema);
