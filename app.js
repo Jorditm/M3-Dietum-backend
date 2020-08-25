@@ -34,7 +34,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://dietum-d4274.web.app"],
+    origin: process.env.PUBLIC_DOMAIN,
   })
 );
 // app.use((req, res, next) => {
