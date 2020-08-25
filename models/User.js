@@ -18,6 +18,7 @@ const userSchema = new Schema({
   //tableDiet: { type: Array },
   doctor: { type: Schema.Types.ObjectId, ref: "Doctor" },
   tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
+  imgUrl: { type: String },
 });
 
 const User = mongoose.model("User", userSchema);

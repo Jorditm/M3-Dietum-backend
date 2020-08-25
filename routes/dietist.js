@@ -4,7 +4,7 @@ const router = express.Router();
 const Doctor = require("../models/Doctor");
 const User = require("../models/User");
 
-router.get("/all-users", (req, res, next) => {
+router.get("/get", (req, res, next) => {
   Doctor.findById(req.session.currentUser._id)
     .populate("users")
     .then((data) => {
@@ -56,7 +56,7 @@ router.post("/add/:id", (req, res, next) => {
     .populate("users")
     .then((doctor) => {
       res.status(200).json(doctor);
-      console.log(doctor.users, user._id, "segundo console log");
+      // console.log(doctor.users, user._id, "segundo console log");
     })
     .catch((err) => console.log(err));
 });
