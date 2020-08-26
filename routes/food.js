@@ -6,8 +6,17 @@ const router = express.Router();
 const Food = require("../models/Food");
 
 router.get("/", (req, res, next) => {
-  console.log("hola");
   Food.find()
+    .then((data) => {
+      res.json(data).status(200);
+    })
+    .catch((err) => {
+      res.json(err).status(500);
+    });
+});
+
+router.post("/get/:id", (req, res, next) => {
+  Food.findById(req.params.id)
     .then((data) => {
       res.json(data).status(200);
     })

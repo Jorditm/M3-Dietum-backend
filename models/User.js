@@ -17,8 +17,13 @@ const userSchema = new Schema({
   age: { type: Number, default: "" },
   //tableDiet: { type: Array },
   doctor: { type: Schema.Types.ObjectId, ref: "Doctor" },
-  tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
+  food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   imageUrl: { type: String },
+  desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  merienda: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
 });
 
 const User = mongoose.model("User", userSchema);

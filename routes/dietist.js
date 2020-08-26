@@ -63,6 +63,7 @@ router.post("/add/:id", (req, res, next) => {
 
 router.get("/profile/:id", (req, res, next) => {
   User.findById(req.params.id)
+    .populate("food")
     .then((data) => {
       res.json(data).status(200);
     })

@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 const Doctor = require("../models/Doctor");
+const Food = require("../models/Food");
 
 const {
   isLoggedIn,
@@ -29,6 +30,36 @@ router.put("/edit", isLoggedIn(), (req, res, next) => {
     })
     .catch((error) => {
       console.log("Error while retrieving user details: ", error);
+    });
+});
+
+router.post("/food/add", (req, res, next) => {
+  console.log(req.body);
+  const { name, weight, energy, userId } = req.body;
+  const newFood = new Food({
+    name,
+    weight,
+    energy,
+  });
+  newFood
+    .save()
+    .then((food) => {
+      console.log("resultado final", food._id, userId);
+      User.findByIdAndUpdate(
+        userId,
+        { $push: { food: food._id } },
+        { new: true }
+      )
+        .populate("food")
+        .then((food) => {
+          res.status(200).json(food);
+          // console.log(doctor.users, user._id, "segundo console log");
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
     });
 });
 
