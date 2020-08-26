@@ -33,7 +33,7 @@ router.put("/edit", isLoggedIn(), (req, res, next) => {
     });
 });
 
-router.post("/food/add", (req, res, next) => {
+router.post("/food/add/desayuno", (req, res, next) => {
   console.log(req.body);
   const { name, weight, energy, userId } = req.body;
   const newFood = new Food({
@@ -47,10 +47,144 @@ router.post("/food/add", (req, res, next) => {
       console.log("resultado final", food._id, userId);
       User.findByIdAndUpdate(
         userId,
-        { $push: { food: food._id } },
+        { $push: { desayuno: food._id } },
         { new: true }
       )
-        .populate("food")
+        .then((food) => {
+          console.log(food);
+          res.json(food).status(200);
+          // console.log(doctor.users, user._id, "segundo console log");
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+    });
+});
+
+router.post("/food/delete/:idUser/:comida/:idComida", (req, res, next) => {
+  console.log(req.body);
+
+  User.findByIdAndUpdate(
+    req.params.idUser,
+    {
+      $pull: { [req.params.comida]: req.params.idComida },
+    },
+    { new: true }
+  )
+    .then((food) => {
+      console.log(food);
+      res.json(food).status(200);
+      // console.log(doctor.users, user._id, "segundo console log");
+    })
+    .catch((err) => console.log(err));
+});
+
+router.post("/food/add/almuerzo", (req, res, next) => {
+  console.log(req.body);
+  const { name, weight, energy, userId } = req.body;
+  const newFood = new Food({
+    name,
+    weight,
+    energy,
+  });
+  newFood
+    .save()
+    .then((food) => {
+      console.log("resultado final", food._id, userId);
+      User.findByIdAndUpdate(
+        userId,
+        { $push: { almuerzo: food._id } },
+        { new: true }
+      )
+        .then((food) => {
+          res.status(200).json(food);
+          // console.log(doctor.users, user._id, "segundo console log");
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+    });
+});
+
+router.post("/food/add/comida", (req, res, next) => {
+  console.log(req.body);
+  const { name, weight, energy, userId } = req.body;
+  const newFood = new Food({
+    name,
+    weight,
+    energy,
+  });
+  newFood
+    .save()
+    .then((food) => {
+      console.log("resultado final", food._id, userId);
+      User.findByIdAndUpdate(
+        userId,
+        { $push: { comida: food._id } },
+        { new: true }
+      )
+        .then((food) => {
+          res.status(200).json(food);
+          // console.log(doctor.users, user._id, "segundo console log");
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+    });
+});
+
+router.post("/food/add/merienda", (req, res, next) => {
+  console.log(req.body);
+  const { name, weight, energy, userId } = req.body;
+  const newFood = new Food({
+    name,
+    weight,
+    energy,
+  });
+  newFood
+    .save()
+    .then((food) => {
+      console.log("resultado final", food._id, userId);
+      User.findByIdAndUpdate(
+        userId,
+        { $push: { merienda: food._id } },
+        { new: true }
+      )
+        .then((food) => {
+          res.status(200).json(food);
+          // console.log(doctor.users, user._id, "segundo console log");
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+    });
+});
+
+router.post("/food/add/cena", (req, res, next) => {
+  console.log(req.body);
+  const { name, weight, energy, userId } = req.body;
+  const newFood = new Food({
+    name,
+    weight,
+    energy,
+  });
+  newFood
+    .save()
+    .then((food) => {
+      console.log("resultado final", food._id, userId);
+      User.findByIdAndUpdate(
+        userId,
+        { $push: { cena: food._id } },
+        { new: true }
+      )
         .then((food) => {
           res.status(200).json(food);
           // console.log(doctor.users, user._id, "segundo console log");

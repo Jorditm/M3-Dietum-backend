@@ -18,7 +18,11 @@ const userSchema = new Schema({
   //tableDiet: { type: Array },
   doctor: { type: Schema.Types.ObjectId, ref: "Doctor" },
   food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  imageUrl: { type: String },
+  imageUrl: {
+    type: String,
+    default:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Ffeedarmy.com%2Fkb%2Fhow-do-i-convert-a-google-merchant-test-feed-to-a-live-feed%2F&psig=AOvVaw2T1uBWfU_V-CT2SV707Np6&ust=1598556082943000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCJ99DLuesCFQAAAAAdAAAAABAD",
+  },
   desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
