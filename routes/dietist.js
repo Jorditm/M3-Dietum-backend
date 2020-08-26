@@ -50,8 +50,8 @@ router.post("/createUser", (req, res, next) => {
 router.post("/add/:id", (req, res, next) => {
   Doctor.findByIdAndUpdate(
     req.session.currentUser._id,
-    { $push: { users: req.params.id } }
-    // { new: true }
+    { $push: { users: req.params.id } },
+    { new: true }
   )
     .populate("users")
     .then((doctor) => {

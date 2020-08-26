@@ -74,6 +74,9 @@ app.use("/user", userRouter);
 app.use("/food", foodRouter);
 app.use("/dietist", dietistRouter);
 
+// app.use("/api", require("./routes/thing-routes"));
+// app.use("/api", require("./routes/file-upload-routes"));
+
 // ERROR HANDLING
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
