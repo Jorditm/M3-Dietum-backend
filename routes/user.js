@@ -12,7 +12,7 @@ const {
   validationLoggin,
 } = require("../helpers/middlewares");
 
-router.put("/edit", isLoggedIn(), (req, res, next) => {
+router.put("/edit/:id", isLoggedIn(), (req, res, next) => {
   const { name, email, password, isDoctor } = req.body;
   const model = isDoctor ? Doctor : User;
   const salt = bcrypt.genSaltSync(saltRounds);
