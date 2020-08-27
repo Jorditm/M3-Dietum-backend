@@ -74,6 +74,12 @@ app.use("/user", userRouter);
 app.use("/food", foodRouter);
 app.use("/dietist", dietistRouter);
 
+// ROUTE FOR SERVING REACT APP (index.html)
+app.use((req, res) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
+
 // ERROR HANDLING
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
