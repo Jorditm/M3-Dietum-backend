@@ -37,7 +37,6 @@ router.post("/createUser", (req, res, next) => {
     weight,
     height,
     age,
-    password,
   } = req.body;
 
   const newUser = new User({
@@ -49,7 +48,6 @@ router.post("/createUser", (req, res, next) => {
     weight,
     height,
     age,
-    password,
   });
   newUser
     .save()
@@ -96,7 +94,6 @@ router.post("/delete/:id", (req, res, next) => {
     weight,
     height,
     age,
-    password,
   } = req.body;
 
   Doctor.findByIdAndUpdate(

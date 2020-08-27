@@ -10,8 +10,11 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  genre: { type: String, default: "", enum: ["Male", "Female"] },
-  password: { type: String, minlength: 6, required: true },
+  genre: {
+    type: String,
+    default: "",
+  },
+  password: { type: String, minlength: 6 },
   weight: { type: Number, default: "" },
   height: { type: Number, default: "" },
   age: { type: Number, default: "" },
