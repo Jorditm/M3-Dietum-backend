@@ -14,7 +14,6 @@ const {
 
 router.put("/edit/:id", isLoggedIn(), (req, res, next) => {
   const { name, email, password, isDoctor } = req.body;
-  const model = isDoctor ? Doctor : User;
   const salt = bcrypt.genSaltSync(saltRounds);
   const hashedPassword = bcrypt.hashSync(password, salt);
   model

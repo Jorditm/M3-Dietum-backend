@@ -5,10 +5,11 @@ const uploader = require("../configs/cloudinary-setup");
 const Doctor = require("../models/Doctor");
 const User = require("../models/User");
 
-router.get("/get", (req, res, next) => {
+router.get("/allPatients", (req, res, next) => {
   Doctor.findById(req.session.currentUser._id)
     .populate("users")
     .then((data) => {
+      console.log(data);
       res.json(data).status(200);
     })
     .catch((err) => {
@@ -29,25 +30,34 @@ router.post("/upload", uploader.single("photo"), (req, res, next) => {
 
 router.post("/createUser", (req, res, next) => {
   const {
-    imageUrl,
+    // imageUrl,
     name,
     lastName,
     email,
-    genre,
+    gender,
+    age,
     weight,
     height,
-    age,
+    hipPerimeter,
+    neckPerimeter,
+    objectives,
+    foodAllergies,
+    smoke,
   } = req.body;
 
   const newUser = new User({
-    imageUrl,
     name,
     lastName,
     email,
-    genre,
+    gender,
+    age,
     weight,
     height,
-    age,
+    hipPerimeter,
+    neckPerimeter,
+    objectives,
+    foodAllergies,
+    smoke,
   });
   newUser
     .save()
@@ -68,7 +78,7 @@ router.post("/add/:id", (req, res, next) => {
     .populate("users")
     .then((doctor) => {
       res.status(200).json(doctor);
-      // console.log(doctor.users, user._id, "segundo console log");
+      //console.log(doctor.users, user._id, "segundo console log");
     })
     .catch((err) => console.log(err));
 });
@@ -85,26 +95,23 @@ router.get("/profile/:id", (req, res, next) => {
 });
 
 router.post("/delete/:id", (req, res, next) => {
-  const {
-    imageUrl,
-    name,
-    lastName,
-    email,
-    genre,
-    weight,
-    height,
-    age,
-  } = req.body;
-
+  User.findByIdAndDelete(req.params.id)
+    .then((data) => {
+      res.json(data).status(200);
+    })
+    .catch((err) => {
+      res.json(err).status(500);
+    });
   Doctor.findByIdAndUpdate(
     req.session.currentUser._id,
-    { $pull: { users: req.params.id } }
-    // { new: true }
+    { $pull: { users: req.params.id } },
+    { new: true }
   )
     .populate("users")
+
     .then((doctor) => {
-      res.status(200).json(doctor);
-      console.log(doctor.users, user._id, "segundo console log");
+      res.status(200).json({ message: "Borrado" }, doctor);
+      // console.log(doctor.users, user._id, "segundo console log");
     })
     .catch((err) => console.log(err));
 });
