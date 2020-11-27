@@ -17,11 +17,7 @@ router.put("/edit/:id", isLoggedIn(), (req, res, next) => {
   const salt = bcrypt.genSaltSync(saltRounds);
   const hashedPassword = bcrypt.hashSync(password, salt);
   model
-    .findByIdAndUpdate(
-      req.session.currentUser._id,
-      // { $set: { name, email, password: hashedPassword } },
-      { new: true }
-    )
+    .findByIdAndUpdate(req.session.currentUser._id, { new: true })
     .then((userEdit) => {
       //console.log(userEdit)
       req.session.currentUser = userEdit;
