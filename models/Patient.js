@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const patientSchema = new Schema({
   name: { type: String, required: true },
   lastName: { type: String, default: "" },
   email: {
@@ -25,7 +25,7 @@ const userSchema = new Schema({
   foodAllergies: { type: String, default: "" },
 
   //tableDiet: { type: Array },
-  doctor: { type: Schema.Types.ObjectId, ref: "Doctor" },
+  dietitian: { type: Schema.Types.ObjectId, ref: "Dietitian" },
   food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   // imageUrl: {
   //   type: String,
@@ -39,5 +39,5 @@ const userSchema = new Schema({
   cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
 });
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const Patient = mongoose.model("Patient", patientSchema);
+module.exports = Patient;

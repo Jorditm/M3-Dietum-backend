@@ -8,7 +8,7 @@ const tableSchema = new Schema({
   merienda: [{ type: String }],
   cena: [{ type: String }],
   food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  client: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  client: [{ type: Schema.Types.ObjectId, ref: "Patient" }],
 });
 
 const Table = mongoose.model("Table", tableSchema);

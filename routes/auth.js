@@ -3,8 +3,8 @@ const router = express.Router();
 const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const User = require("../models/User");
-const Doctor = require("../models/Doctor");
+const Patient = require("../models/Patient");
+const Dietitian = require("../models/Dietitian");
 
 // HELPER FUNCTIONS
 const {
@@ -26,14 +26,14 @@ router.post(
     console.log(req.body);
     try {
       // chequea si el email ya existe en la BD
-      const emailExists = await Doctor.findOne({ email }, "email");
+      const emailExists = await Dietitian.findOne({ email }, "email");
       // si el usuario ya existe, pasa el error a middleware error usando next()
       if (emailExists) return next(createError(400));
       else {
         // en caso contratio, si el usuario no existe, hace hash del password y crea un nuevo usuario en la BD
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashPass = bcrypt.hashSync(password, salt);
-        const newUser = await Doctor.create({
+        const newUser = await Dietitian.create({
           name,
           lastName,
           proName,
@@ -64,7 +64,7 @@ router.post(
     const { email, password } = req.body;
     try {
       // revisa si el usuario existe en la BD
-      const user = await Doctor.findOne({ email });
+      const user = await Dietitian.findOne({ email });
       // si el usuario no existe, pasa el error al middleware error usando next()
       if (!user) {
         next(createError(404));

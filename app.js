@@ -23,9 +23,9 @@ mongoose
   .catch((err) => console.error(err));
 
 const authRouter = require("./routes/auth");
-const userRouter = require("./routes/user");
+const patientRouter = require("./routes/patient");
 const foodRouter = require("./routes/food");
-const dietistRouter = require("./routes/dietist");
+const dietitianRouter = require("./routes/dietitian");
 
 // EXPRESS SERVER INSTANCE
 const app = express();
@@ -70,9 +70,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTER MIDDLEWARE
 app.use("/auth", authRouter);
-app.use("/user", userRouter);
+app.use("/patient", patientRouter);
 app.use("/food", foodRouter);
-app.use("/dietist", dietistRouter);
+app.use("/dietitian", dietitianRouter);
 
 // ROUTE FOR SERVING REACT APP (index.html)
 app.use((req, res) => {

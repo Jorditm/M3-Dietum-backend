@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const docSchema = new Schema({
+const dietitianSchema = new Schema({
   name: { type: String },
   lastName: { type: String, default: "" },
   proName: { type: String, default: "" },
@@ -14,10 +14,11 @@ const docSchema = new Schema({
   // genre: { type: String, default: "", enum: ["Male", "Female"] },
   password: { type: String, minlength: 6, required: true },
   //tableDiet: { type: Array },
-  users: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  patients: [{ type: Schema.Types.ObjectId, ref: "Patient" }],
   tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
-  isDoctor: { type: Boolean, default: true },
+  isDietitian: { type: Boolean, default: true },
+  meesage: [{ type: String, default: "" }],
 });
 
-const Doctor = mongoose.model("Doctor", docSchema);
-module.exports = Doctor;
+const Dietitian = mongoose.model("Dietitian", dietitianSchema);
+module.exports = Dietitian;
