@@ -8,20 +8,16 @@ const uploader = require("../configs/cloudinary-setup");
 const Dietitian = require("../models/Dietitian");
 const Patient = require("../models/Patient");
 
-const {
-  isLoggedIn,
-  isNotLoggedIn,
-  validationLoggin,
-} = require("../helpers/middlewares");
+const { isLoggedIn } = require("../helpers/middlewares");
 
 router.put("/edit/:id", isLoggedIn(), (req, res, next) => {
-  const { name, lastName, proName, password } = req.body;
+  const { name, lastName, proName } = req.body;
 
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const hashedPassword = bcrypt.hashSync(password, salt);
+  // const salt = bcrypt.genSaltSync(saltRounds);
+  // const hashedPassword = bcrypt.hashSync(password, salt);
   Dietitian.findByIdAndUpdate(
     req.session.currentUser._id,
-    { $set: { name, lastName, proName, password } },
+    { $set: { name, lastName, proName } },
     { new: true }
   )
     .then((userEdit) => {
