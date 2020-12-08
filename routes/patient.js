@@ -171,14 +171,14 @@ router.post("/food/add/cena", (req, res, next) => {
     });
 });
 
-router.delete("/delete/:id", (req, res, next) => {
-  Patient.findByIdAndDelete(req.params.id)
-    .then(() => {
-      console.log("the Patient has been destroy");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
+// router.delete("/delete/:id", (req, res, next) => {
+//   Patient.findByIdAndDelete(req.params.id)
+//     .then(() => {
+//       console.log("the Patient has been destroy");
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// });
 
 module.exports = router;

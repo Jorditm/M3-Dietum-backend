@@ -42,6 +42,7 @@ router.get("/allPatients", (req, res, next) => {
     });
 });
 
+//Fotos  de perfil
 router.post("/upload", uploader.single("photo"), (req, res, next) => {
   // console.log("file is: ", req.file);
   if (!req.file) {
@@ -55,7 +56,7 @@ router.post("/upload", uploader.single("photo"), (req, res, next) => {
 
 router.post("/createPatient", (req, res, next) => {
   const {
-    // imageUrl,
+    imageUrl,
     name,
     lastName,
     email,
@@ -71,6 +72,7 @@ router.post("/createPatient", (req, res, next) => {
   } = req.body;
 
   const newPatient = new Patient({
+    imageUrl,
     name,
     lastName,
     email,
@@ -129,8 +131,8 @@ router.post("/delete/:id", (req, res, next) => {
     });
   Dietitian.findByIdAndUpdate(
     req.session.currentUser._id,
-    { $pull: { patients: req.params.id } },
-    { new: true }
+    { $pull: { patients: req.params.id } }
+    // { new: true }
   )
     .populate("patients")
     .then((dietitian) => {
@@ -140,17 +142,63 @@ router.post("/delete/:id", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/message", (req, res, next) => {
-  const { message } = req.body;
-  const newMessage = new message({ message });
-  newMessage
-    .save()
-    .then((message) => {
-      res.json(message).status(200);
+router.put("/editPatient/:id", isLoggedIn(), (req, res, next) => {
+  const {
+    imageUrl,
+    name,
+    lastName,
+    email,
+    gender,
+    age,
+    weight,
+    height,
+    hipPerimeter,
+    neckPerimeter,
+    objectives,
+    foodAllergies,
+    smoke,
+  } = req.body;
+  Patient.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: {
+        imageUrl,
+        name,
+        lastName,
+        email,
+        gender,
+        age,
+        weight,
+        height,
+        hipPerimeter,
+        neckPerimeter,
+        objectives,
+        foodAllergies,
+        smoke,
+      },
+    },
+    { new: true }
+  )
+    .then((patientEdit) => {
+      console.log("Edit patient", patientEdit);
+      res.json(patientEdit);
     })
-    .catch((err) => {
-      res.json(err).status(500);
+    .catch((error) => {
+      console.log("Error while retrieving patient details: ", error);
     });
 });
+
+// router.post("/message", (req, res, next) => {
+//   const { message } = req.body;
+//   const newMessage = new message({ message });
+//   newMessage
+//     .save()
+//     .then((message) => {
+//       res.json(message).status(200);
+//     })
+//     .catch((err) => {
+//       res.json(err).status(500);
+//     });
+// });
 
 module.exports = router;
