@@ -31,6 +31,8 @@ const patientSchema = new Schema({
     type: String,
     default: "",
   },
+  messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+
   desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
