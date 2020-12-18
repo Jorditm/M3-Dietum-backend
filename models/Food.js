@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const foodSchema = new Schema({
-  name: { type: String, required: true },
-  weight: { type: String, required: true },
-  energy: { type: Number, required: true },
-  protein: { type: Number },
-  carbs: { type: Number },
-  fat: { type: Number },
+  // name: { type: String, required: true },
+  // weight: { type: String, required: true },
+  // energy: { type: Number, required: true },
+  // protein: { type: Number },
+  // carbs: { type: Number },
+  // fat: { type: Number },
 
   FoodGroup: { type: String, default: "" },
-  Description: { type: String, default: "" },
+  Descrip: { type: String, default: "" },
   CommonName: { type: String, default: "" },
   MfgName: { type: String, default: "" },
   ScientificName: { type: String, default: "" },

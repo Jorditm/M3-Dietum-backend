@@ -8,5 +8,5 @@ const messageSchema = new Schema({
   patient: { type: Schema.Types.ObjectId, ref: "Patient" },
 });
 
-const Message = mongoose.model("message", messageSchema);
+const Message = mongoose.model("Message", messageSchema);
 module.exports = Message;

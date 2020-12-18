@@ -24,20 +24,21 @@ const patientSchema = new Schema({
   smoke: { type: String, default: "" },
   foodAllergies: { type: String, default: "" },
 
-  //tableDiet: { type: Array },
-  dietitian: { type: Schema.Types.ObjectId, ref: "Dietitian" },
-  food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  // dietitian: { type: Schema.Types.ObjectId, ref: "Dietitian" },
+  // food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   imageUrl: {
     type: String,
     default: "",
   },
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 
-  desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  merienda: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
+
+  // desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  // almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  // comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  // merienda: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  // cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
 });
 
 const Patient = mongoose.model("Patient", patientSchema);

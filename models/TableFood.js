@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const tableSchema = new Schema({
-  desayuno: [{ type: String }],
-  almuerzo: [{ type: String }],
-  comida: [{ type: String }],
-  merienda: [{ type: String }],
-  cena: [{ type: String }],
-  food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  client: [{ type: Schema.Types.ObjectId, ref: "Patient" }],
+const tableFoodSchema = new Schema({
+  desayuno: ["comida"],
+  almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  merienda: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  // food: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  patient: [{ type: Schema.Types.ObjectId, ref: "Patient" }],
 });
 
-const Table = mongoose.model("Table", tableSchema);
-module.exports = Table;
+const TableFood = mongoose.model("TableFood", tableFoodSchema);
+module.exports = TableFood;

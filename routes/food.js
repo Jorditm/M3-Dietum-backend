@@ -2,18 +2,38 @@ const express = require("express");
 const router = express.Router();
 
 // const Dieitian = require("../models/Dieitian");
-// const Patient = require("../models/Patient");
 const Food = require("../models/Food");
 
-router.get("/", (req, res, next) => {
+const axios = require("axios");
+const Patient = require("../models/Patient");
+const TableFood = require("../models/TableFood");
+
+router.get("/allFoods", (req, res, next) => {
   Food.find()
     .then((data) => {
+      console.log("data", data);
       res.json(data).status(200);
     })
     .catch((err) => {
       res.json(err).status(500);
     });
 });
+
+router.post("/addFood/:patientId/:tableFoodId/:foodId", (req, res, next) => {
+  Patient.findByIdAndUpdate(
+    req.params.patientId,
+    { $push: { [req.params.tableFoodId]: req.params.foodId } },
+    { new: true }
+  )
+    .populate("tableFood")
+    .then((food) => {
+      console.log(food);
+      res.json(food).status(200);
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get("/desayuno", (req, res, next) => {});
 
 router.post("/get/:id", (req, res, next) => {
   Food.findById(req.params.id)

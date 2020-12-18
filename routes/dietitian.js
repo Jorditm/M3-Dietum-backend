@@ -112,7 +112,10 @@ router.post("/add/:id", (req, res, next) => {
 
 router.get("/profile/:id", (req, res, next) => {
   Patient.findById(req.params.id)
-    .populate("desayuno almuerzo comida merienda cena")
+    .populate({
+      path: "tableFood",
+      select: "_id desayuno almuerzo comida merienda cena",
+    })
     .then((data) => {
       res.json(data).status(200);
     })

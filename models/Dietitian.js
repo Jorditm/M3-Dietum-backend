@@ -15,7 +15,7 @@ const dietitianSchema = new Schema({
   password: { type: String, minlength: 6, required: true },
   //tableDiet: { type: Array },
   patients: [{ type: Schema.Types.ObjectId, ref: "Patient" }],
-  tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
+  // tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
   isDietitian: { type: Boolean, default: true },
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 });
