@@ -33,6 +33,20 @@ router.post("/addFood/:patientId/:tableFoodId/:foodId", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
+router.post("/createFood", (req, res, next) => {
+  const {
+    Descrip,
+    CommonName,
+    MfgName,
+    ScientificName,
+    Energy_kcal,
+    Protein_g,
+    Fat_g,
+    Carb_g,
+    Sugar_g,
+  } = req.body;
+});
+
 router.get("/desayuno", (req, res, next) => {});
 
 router.post("/get/:id", (req, res, next) => {
