@@ -12,7 +12,6 @@ const foodSchema = new Schema({
   FoodGroup: { type: String, default: "" },
   Descrip: { type: String, default: "" },
   CommonName: { type: String, default: "" },
-  MfgName: { type: String, default: "" },
   ScientificName: { type: String, default: "" },
   Energy_kcal: { type: String, default: "" },
   Protein_g: { type: String, default: "" },

@@ -32,13 +32,13 @@ const patientSchema = new Schema({
   },
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 
-  tableFood: [{ type: Schema.Types.ObjectId, ref: "TableFood" }],
-
-  // desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  // almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  // comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  // merienda: [{ type: Schema.Types.ObjectId, ref: "Food" }],
-  // cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  diet: {
+    desayuno: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+    almuerzo: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+    comida: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+    merienda: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+    cena: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+  },
 });
 
 const Patient = mongoose.model("Patient", patientSchema);

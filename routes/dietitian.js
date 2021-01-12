@@ -9,6 +9,7 @@ const Dietitian = require("../models/Dietitian");
 const Patient = require("../models/Patient");
 
 const { isLoggedIn } = require("../helpers/middlewares");
+const TableFood = require("../models/TableFood");
 
 router.put("/edit/:id", isLoggedIn(), (req, res, next) => {
   const { name, lastName, proName } = req.body;
@@ -112,10 +113,6 @@ router.post("/add/:id", (req, res, next) => {
 
 router.get("/profile/:id", (req, res, next) => {
   Patient.findById(req.params.id)
-    .populate({
-      path: "tableFood",
-      select: "_id desayuno almuerzo comida merienda cena",
-    })
     .then((data) => {
       res.json(data).status(200);
     })
