@@ -18,6 +18,7 @@ mongoose
     useUnifiedTopology: true,
     keepAlive: true,
     useNewUrlParser: true,
+    useFindAndModify: false,
   })
   .then(() => console.log(`Connected to database`))
   .catch((err) => console.error(err));

@@ -129,11 +129,9 @@ router.post("/delete/:id", (req, res, next) => {
     .catch((err) => {
       res.json(err).status(500);
     });
-  Dietitian.findByIdAndUpdate(
-    req.session.currentUser._id,
-    { $pull: { patients: req.params.id } }
-    // { new: true }
-  )
+  Dietitian.findByIdAndUpdate(req.session.currentUser._id, {
+    $pull: { patients: req.params.id },
+  })
     .populate("patients")
     .then((dietitian) => {
       res.status(200).json({ message: "Borrado" }, dietitian);
@@ -187,18 +185,5 @@ router.put("/editPatient/:id", isLoggedIn(), (req, res, next) => {
       console.log("Error while retrieving patient details: ", error);
     });
 });
-
-// router.post("/message", (req, res, next) => {
-//   const { message } = req.body;
-//   const newMessage = new message({ message });
-//   newMessage
-//     .save()
-//     .then((message) => {
-//       res.json(message).status(200);
-//     })
-//     .catch((err) => {
-//       res.json(err).status(500);
-//     });
-// });
 
 module.exports = router;
